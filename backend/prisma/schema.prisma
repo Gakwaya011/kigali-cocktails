@@ -1,0 +1,76 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model CocktailItem {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Decimal
+  imageUrl    String
+  isPromo     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model BookingPackage {
+  id          String    @id @default(uuid())
+  packageName String
+  description String
+  basePrice   Decimal
+  bookings    Booking[]
+}
+
+model Booking {
+  id          String         @id @default(uuid())
+  clientName  String
+  clientEmail String
+  clientPhone String
+  eventDate   DateTime
+  status      BookingStatus  @default(PENDING)
+  packageId   String
+  package     BookingPackage @relation(fields: [packageId], references: [id])
+  payment     Payment?
+  contract    Contract?
+}
+
+model Payment {
+  id        String        @id @default(uuid())
+  bookingId String        @unique
+  booking   Booking       @relation(fields: [bookingId], references: [id])
+  amount    Decimal
+  method    PaymentMethod
+  reference String        @unique
+  status    PaymentStatus @default(PENDING)
+}
+
+model Contract {
+  id          String   @id @default(uuid())
+  bookingId   String   @unique
+  booking     Booking  @relation(fields: [bookingId], references: [id])
+  contractUrl String
+  isSigned    Boolean  @default(false)
+  signedAt    DateTime?
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  MOMO
+  AIRTEL_MONEY
+  CARD
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
