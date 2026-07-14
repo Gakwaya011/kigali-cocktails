@@ -26,24 +26,24 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 px-6 bg-white border-t border-ink/5">
+    <section className="py-16 sm:py-20 md:py-24 px-6 bg-white border-t border-ink/5">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16"
         >
           <p className="text-gold text-xs font-medium uppercase tracking-[0.3em] mb-3">
             What We Offer
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-light text-ink">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-light text-ink">
             Our Services
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 sm:gap-8">
           {services.map(({ icon: Icon, title, desc }, idx) => (
             <motion.div
               key={title}
