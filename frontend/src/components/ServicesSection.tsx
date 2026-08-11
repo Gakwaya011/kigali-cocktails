@@ -58,8 +58,36 @@ export default function ServicesSection({ onNavigate }: ServicesSectionProps) {
             actually remember.
           </p>
 
+          {/* Mobile: static stacked cards (no hover-expand — doesn't translate to touch/narrow screens) */}
+          <div className="flex flex-col gap-4 sm:hidden">
+            {services.map((service) => (
+              <div
+                key={service.title}
+                className="relative h-44 rounded-xl overflow-hidden"
+              >
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/30 to-ink/40" />
+                <h3 className="absolute top-3 left-3 right-3 text-white font-semibold text-sm uppercase tracking-wide">
+                  {service.title}
+                </h3>
+                <ul className="absolute bottom-3 left-3 right-3 space-y-0.5">
+                  {service.items.map((item) => (
+                    <li key={item} className="text-white/80 text-xs font-light">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* sm and up: hover/tap-to-expand accordion */}
           <div
-            className="flex items-center gap-2 sm:gap-4 h-95 sm:h-120"
+            className="hidden sm:flex items-center gap-4 h-120"
             onMouseLeave={() => setActive(null)}
           >
             {services.map((service, idx) => {
@@ -84,7 +112,7 @@ export default function ServicesSection({ onNavigate }: ServicesSectionProps) {
                     }`}
                   />
 
-                  <h3 className="absolute top-4 left-4 right-4 text-white font-semibold text-sm sm:text-base uppercase tracking-wide">
+                  <h3 className="absolute top-4 left-4 right-4 text-white font-semibold text-base uppercase tracking-wide">
                     {service.title}
                   </h3>
 
@@ -98,7 +126,7 @@ export default function ServicesSection({ onNavigate }: ServicesSectionProps) {
                         className="absolute bottom-4 left-4 right-4 space-y-1"
                       >
                         {service.items.map((item) => (
-                          <li key={item} className="text-white/80 text-xs sm:text-sm font-light">
+                          <li key={item} className="text-white/80 text-sm font-light">
                             {item}
                           </li>
                         ))}

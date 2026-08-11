@@ -41,7 +41,9 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`w-full max-w-6xl rounded-full backdrop-blur-md transition-colors duration-300 ${
+        className={`w-full max-w-6xl backdrop-blur-md transition-colors duration-300 overflow-hidden ${
+          mobileOpen ? 'rounded-3xl' : 'rounded-full'
+        } ${
           solid
             ? 'bg-white/95 shadow-xl shadow-ink/10 border border-ink/10'
             : 'bg-ink/60 border border-white/20'

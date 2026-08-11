@@ -28,11 +28,11 @@ export default function ShowcaseSection({ onNavigate }: ShowcaseProps) {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-5 gap-3 sm:gap-4 h-[46vh] min-h-[320px] sm:h-[52vh] mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 h-[46vh] min-h-80 sm:h-[52vh] mb-10">
           {[
-            { type: 'img', src: hero1, alt: 'Signature cocktail service', span: 'col-span-2' },
-            { type: 'video', src: heroVideo, alt: 'Mixologist at work', span: 'col-span-2' },
-            { type: 'img', src: martiniRow, alt: 'Signature cocktails ready to serve', span: 'col-span-1 hidden sm:block' },
+            { type: 'img', src: hero1, alt: 'Signature cocktail service', span: 'col-span-1 sm:col-span-2' },
+            { type: 'video', src: heroVideo, alt: 'Mixologist at work', span: 'col-span-1 sm:col-span-2' },
+            { type: 'img', src: martiniRow, alt: 'Signature cocktails ready to serve', span: 'hidden sm:block sm:col-span-1' },
           ].map((media, idx) => (
             <motion.div
               key={idx}

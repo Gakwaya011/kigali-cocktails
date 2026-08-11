@@ -48,16 +48,16 @@ export default function HeroSection({ onNavigate }: HeroProps) {
       >
         <motion.h1
           variants={container}
-          className="font-display text-5xl sm:text-6xl md:text-7xl font-medium leading-[1.05] mb-6 text-balance"
+          className="font-display text-5xl sm:text-6xl md:text-7xl font-medium leading-[1.15] mb-6 text-balance"
         >
           {words.map((w, i) => (
-            <span key={i} className="inline-block overflow-hidden pb-1 mr-3 sm:mr-4 align-bottom">
+            <span key={i} className="inline-block overflow-hidden pt-2 pb-1 mr-3 sm:mr-4 align-bottom">
               <motion.span variants={word} className="inline-block">
                 {w}
               </motion.span>
             </span>
           ))}
-          <span className="inline-block overflow-hidden pb-1 align-bottom">
+          <span className="inline-block overflow-hidden pt-2 pb-1 align-bottom">
             <motion.span variants={word} className="inline-block italic text-[#28aeff]">
               Kigali Event
             </motion.span>
