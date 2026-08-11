@@ -17,6 +17,7 @@ const packages = [
       'Elegant White Portable Bar',
       'Premium Glassware & Garnishes',
     ],
+    featured: true,
   },
   {
     title: 'Bridal Shower / VIP Party',
@@ -28,6 +29,7 @@ const packages = [
       '3 Pre-selected Menu Options',
       '4 Hours of Service',
     ],
+    featured: false,
   },
   {
     title: 'Corporate Launch',
@@ -39,27 +41,28 @@ const packages = [
       'Non-alcoholic Mocktail Options',
       'Professional Uniformed Staff',
     ],
+    featured: false,
   },
 ];
 
 export default function PackagesSection({ onNavigate }: PackagesProps) {
   return (
-    <section className="py-24 px-6 bg-white border-t border-ink/5">
+    <section className="py-16 sm:py-24 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <p className="text-sapphire text-xs font-medium uppercase tracking-[0.3em] mb-3">
+          <p className="text-sapphire text-xs font-semibold uppercase tracking-[0.3em] mb-4">
             Packages
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-light text-ink">
-            Our Service Packages
+          <h2 className="font-sans font-black uppercase tracking-tighter leading-[0.9] text-5xl sm:text-6xl md:text-7xl text-ink mb-5">
+            Packages.
           </h2>
-          <p className="text-taupe mt-3 font-light">
+          <p className="text-taupe font-light">
             Tailored mobile bar experiences for any occasion.
           </p>
         </motion.div>
@@ -73,18 +76,48 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, delay: idx * 0.12 }}
               whileHover={{ y: -6 }}
-              className="group bg-cream border border-ink/10 hover:border-sapphire/50 rounded-2xl p-8 transition-all flex flex-col justify-between"
+              className={`relative rounded-2xl p-8 flex flex-col justify-between transition-all ${
+                pkg.featured
+                  ? 'bg-ink text-white ring-2 ring-sapphire'
+                  : 'bg-cream border border-ink/10 hover:border-sapphire/50'
+              }`}
             >
+              {pkg.featured && (
+                <span className="absolute -top-3.5 left-8 bg-sapphire text-white text-xs font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                  Most Booked
+                </span>
+              )}
               <div>
-                <h3 className="text-2xl font-display font-medium text-ink mb-2">
+                <h3
+                  className={`text-2xl font-display font-medium mb-2 ${
+                    pkg.featured ? 'text-white' : 'text-ink'
+                  }`}
+                >
                   {pkg.title}
                 </h3>
-                <p className="text-sapphire font-mono text-sm mb-4">{pkg.price}</p>
-                <p className="text-taupe font-light mb-6">{pkg.desc}</p>
+                <p
+                  className={`font-mono text-sm mb-4 ${
+                    pkg.featured ? 'text-sapphire-light' : 'text-sapphire'
+                  }`}
+                >
+                  {pkg.price}
+                </p>
+                <p className={`font-light mb-6 ${pkg.featured ? 'text-white/70' : 'text-taupe'}`}>
+                  {pkg.desc}
+                </p>
                 <ul className="space-y-3 mb-8">
                   {pkg.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2 text-sm text-taupe">
-                      <CheckCircle2 className="w-4 h-4 text-sapphire mt-0.5 flex-shrink-0" />
+                    <li
+                      key={feat}
+                      className={`flex items-start gap-2 text-sm ${
+                        pkg.featured ? 'text-white/80' : 'text-taupe'
+                      }`}
+                    >
+                      <CheckCircle2
+                        className={`w-4 h-4 mt-0.5 shrink-0 ${
+                          pkg.featured ? 'text-sapphire-light' : 'text-sapphire'
+                        }`}
+                      />
                       {feat}
                     </li>
                   ))}
@@ -92,7 +125,11 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
               </div>
               <button
                 onClick={() => onNavigate('booking')}
-                className="w-full border border-sapphire text-sapphire hover:bg-sapphire hover:text-white py-3 rounded-xl font-medium transition-colors"
+                className={`w-full py-3 rounded-xl font-medium transition-colors ${
+                  pkg.featured
+                    ? 'bg-sapphire hover:bg-sapphire-light text-white'
+                    : 'border border-sapphire text-sapphire hover:bg-sapphire hover:text-white'
+                }`}
               >
                 Inquire Now
               </button>

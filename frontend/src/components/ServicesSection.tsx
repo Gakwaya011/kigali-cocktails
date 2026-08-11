@@ -38,6 +38,7 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
+          onViewportEnter={() => setActive(0)}
           transition={{ duration: 0.7 }}
           className="bg-ink rounded-4xl sm:rounded-[2.5rem] px-6 sm:px-12 md:px-16 pt-12 sm:pt-16 pb-12 sm:pb-16"
         >
@@ -54,7 +55,7 @@ export default function ServicesSection() {
 
           <div
             className="flex items-end gap-2 sm:gap-4 h-95 sm:h-120"
-            onMouseLeave={() => setActive(null)}
+            onMouseLeave={() => setActive(0)}
           >
             {services.map((service, idx) => {
               const isActive = active === idx;
@@ -62,7 +63,7 @@ export default function ServicesSection() {
                 <motion.div
                   key={service.title}
                   onMouseEnter={() => setActive(idx)}
-                  onClick={() => setActive(isActive ? null : idx)}
+                  onClick={() => setActive(idx)}
                   animate={{ height: isActive ? '100%' : '22%' }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="relative flex-1 rounded-xl overflow-hidden cursor-pointer"

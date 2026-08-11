@@ -58,7 +58,7 @@ export default function HeroSection({ onNavigate }: HeroProps) {
             </span>
           ))}
           <span className="inline-block overflow-hidden pb-1 align-bottom">
-            <motion.span variants={word} className="inline-block italic text-sapphire-light">
+            <motion.span variants={word} className="inline-block italic text-[#28aeff]">
               Kigali Event
             </motion.span>
           </span>

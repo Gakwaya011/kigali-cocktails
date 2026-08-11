@@ -9,7 +9,7 @@
   --color-sapphire-light: #2e7cb8;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

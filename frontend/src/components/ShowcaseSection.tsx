@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import type { PageState } from '../App';
 import hero1 from '../assets/hero1.jpg';
 import hero3 from '../assets/second hero replacer.jpg';
-import heroVideo from '../assets/kigali cocktail.mp4';
+import heroVideo from '../assets/IMG_4480 resized.mp4';
 
 interface ShowcaseProps {
   onNavigate: (page: PageState) => void;
@@ -51,6 +51,14 @@ export default function ShowcaseSection({ onNavigate }: ShowcaseProps) {
                   muted
                   playsInline
                   aria-label={media.alt}
+                  className="w-full h-full object-cover"
+                />
+              ) : idx === 2 ? (
+                <motion.img
+                  src={media.src}
+                  alt={media.alt}
+                  animate={{ scale: [1, 1.12, 1] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
                   className="w-full h-full object-cover"
                 />
               ) : (
