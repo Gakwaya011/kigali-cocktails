@@ -12,7 +12,7 @@ export default function BookingPage() {
         <div className="bg-ink p-10 text-center">
           <CalendarCheck className="w-12 h-12 text-sapphire-light mx-auto mb-4" />
           <h2 className="text-3xl font-display font-light text-white mb-2">Secure Your Date</h2>
-          <p className="text-white/70 font-light">We book up fast for weekend events in Kigali. Reach out to secure your mobile bar setup today.</p>
+          <p className="text-white/70 font-light">We're available every day of the week for events across Kigali. Reach out to secure your mobile bar setup today.</p>
         </div>
 
         <div className="p-10 text-center">
