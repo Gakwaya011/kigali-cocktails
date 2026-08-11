@@ -53,7 +53,7 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-gold text-xs font-medium uppercase tracking-[0.3em] mb-3">
+          <p className="text-sapphire text-xs font-medium uppercase tracking-[0.3em] mb-3">
             Packages
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-light text-ink">
@@ -73,18 +73,18 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, delay: idx * 0.12 }}
               whileHover={{ y: -6 }}
-              className="group bg-cream border border-ink/10 hover:border-gold/50 rounded-2xl p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+              className="group bg-cream border border-ink/10 hover:border-sapphire/50 rounded-2xl p-8 transition-all flex flex-col justify-between"
             >
               <div>
                 <h3 className="text-2xl font-display font-medium text-ink mb-2">
                   {pkg.title}
                 </h3>
-                <p className="text-gold font-mono text-sm mb-4">{pkg.price}</p>
+                <p className="text-sapphire font-mono text-sm mb-4">{pkg.price}</p>
                 <p className="text-taupe font-light mb-6">{pkg.desc}</p>
                 <ul className="space-y-3 mb-8">
                   {pkg.features.map((feat) => (
                     <li key={feat} className="flex items-start gap-2 text-sm text-taupe">
-                      <CheckCircle2 className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-sapphire mt-0.5 flex-shrink-0" />
                       {feat}
                     </li>
                   ))}
@@ -92,7 +92,7 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
               </div>
               <button
                 onClick={() => onNavigate('booking')}
-                className="w-full border border-gold text-gold hover:bg-gold hover:text-white py-3 rounded-xl font-medium transition-colors"
+                className="w-full border border-sapphire text-sapphire hover:bg-sapphire hover:text-white py-3 rounded-xl font-medium transition-colors"
               >
                 Inquire Now
               </button>

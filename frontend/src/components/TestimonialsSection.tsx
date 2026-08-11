@@ -24,7 +24,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 px-6 bg-white border-t border-ink/5">
+    <section className="py-24 px-6 bg-cream">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-gold text-xs font-medium uppercase tracking-[0.3em] mb-3">
+          <p className="text-sapphire text-xs font-medium uppercase tracking-[0.3em] mb-3">
             Testimonials
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-light text-ink">
@@ -41,7 +41,7 @@ export default function TestimonialsSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-ink/10">
           {testimonials.map(({ quote, name, event }, idx) => (
             <motion.div
               key={name}
@@ -49,10 +49,10 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-cream border border-ink/10 rounded-2xl p-8 flex flex-col"
+              className="text-center px-6 py-8 md:py-0 flex flex-col items-center"
             >
-              <Quote className="w-7 h-7 text-gold mb-4" strokeWidth={1.5} />
-              <p className="text-taupe font-light leading-relaxed mb-6 flex-1">
+              <Quote className="w-7 h-7 text-sapphire mb-4" strokeWidth={1.5} />
+              <p className="text-taupe font-light leading-relaxed mb-6">
                 &ldquo;{quote}&rdquo;
               </p>
               <div>

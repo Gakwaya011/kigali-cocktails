@@ -18,13 +18,13 @@ export default function Footer({ onNavigate }: FooterProps) {
 
   return (
     <footer className="bg-ink border-t border-white/10 pt-16 pb-8 px-6">
-      <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-3 text-center md:text-left">
+      <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-4 text-center md:text-left">
         <div className="flex flex-col items-center md:items-start gap-3">
           <div className="flex items-center gap-3">
             <img
               src={logo}
               alt="Kigali Luxury Cocktails"
-              className="w-11 h-11 rounded-full object-cover ring-2 ring-gold/40"
+              className="w-11 h-11 rounded-full object-cover ring-2 ring-sapphire-light/40"
             />
             <span className="font-display tracking-[0.15em] text-base text-white uppercase">
               Kigali Luxury Cocktails
@@ -36,14 +36,14 @@ export default function Footer({ onNavigate }: FooterProps) {
         </div>
 
         <div className="flex flex-col items-center md:items-start gap-2">
-          <p className="text-gold text-xs font-medium uppercase tracking-[0.2em] mb-2">
+          <p className="text-sapphire-light text-xs font-medium uppercase tracking-[0.2em] mb-2">
             Explore
           </p>
           {links.map(({ page, label }) => (
             <button
               key={page}
               onClick={() => onNavigate(page)}
-              className="text-white/70 hover:text-gold transition-colors text-sm"
+              className="text-white/70 hover:text-sapphire-light transition-colors text-sm"
             >
               {label}
             </button>
@@ -51,12 +51,12 @@ export default function Footer({ onNavigate }: FooterProps) {
         </div>
 
         <div className="flex flex-col items-center md:items-start gap-3">
-          <p className="text-gold text-xs font-medium uppercase tracking-[0.2em] mb-1">
+          <p className="text-sapphire-light text-xs font-medium uppercase tracking-[0.2em] mb-1">
             Get in Touch
           </p>
           <a
             href="tel:+250783845473"
-            className="flex items-center gap-2 text-white/70 hover:text-gold transition-colors text-sm"
+            className="flex items-center gap-2 text-white/70 hover:text-sapphire-light transition-colors text-sm"
           >
             <Phone className="w-4 h-4" /> 0783 845 473
           </a>
@@ -64,11 +64,37 @@ export default function Footer({ onNavigate }: FooterProps) {
             href="https://wa.me/250783845473"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 text-white/70 hover:text-gold transition-colors text-sm"
+            className="flex items-center gap-2 text-white/70 hover:text-sapphire-light transition-colors text-sm"
           >
             <MessageCircle className="w-4 h-4" /> Chat on WhatsApp
           </a>
           <p className="text-white/70 text-sm">Kigali, Rwanda</p>
+        </div>
+
+        <div className="flex flex-col items-center md:items-start gap-3">
+          <p className="text-sapphire-light text-xs font-medium uppercase tracking-[0.2em] mb-1">
+            Subscribe
+          </p>
+          <p className="text-white/60 text-sm font-light">
+            Get updates on new packages and offers.
+          </p>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex flex-col gap-2 w-full max-w-xs"
+          >
+            <input
+              type="email"
+              required
+              placeholder="Email address"
+              className="w-full bg-white/10 border border-white/15 rounded-md px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-sapphire-light transition-colors"
+            />
+            <button
+              type="submit"
+              className="w-full bg-sapphire hover:bg-sapphire-light text-white text-sm font-medium rounded-md px-4 py-2.5 transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
       </div>
 

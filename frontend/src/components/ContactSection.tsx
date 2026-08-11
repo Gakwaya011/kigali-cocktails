@@ -14,15 +14,15 @@ export default function ContactSection({ onNavigate }: ContactSectionProps) {
   const waLink = `https://wa.me/${waNumber}?text=${waMessage}`;
 
   return (
-    <section className="py-24 px-6 bg-cream">
+    <section className="py-24 px-6 bg-white">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto text-center bg-white border border-ink/10 rounded-3xl shadow-sm p-12"
+        className="max-w-2xl mx-auto text-center"
       >
-        <p className="text-gold text-xs font-medium uppercase tracking-[0.3em] mb-3">
+        <p className="text-sapphire text-xs font-medium uppercase tracking-[0.3em] mb-3">
           Get In Touch
         </p>
         <h2 className="font-display text-3xl md:text-4xl font-light text-ink mb-4">
@@ -34,11 +34,11 @@ export default function ContactSection({ onNavigate }: ContactSectionProps) {
         </p>
 
         <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm text-taupe">
-          <a href="tel:+250783845473" className="flex items-center gap-2 hover:text-gold transition-colors">
-            <Phone className="w-4 h-4 text-gold" /> 0783 845 473
+          <a href="tel:+250783845473" className="flex items-center gap-2 hover:text-sapphire transition-colors">
+            <Phone className="w-4 h-4 text-sapphire" /> 0783 845 473
           </a>
           <span className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-gold" /> Kigali, Rwanda
+            <MapPin className="w-4 h-4 text-sapphire" /> Kigali, Rwanda
           </span>
         </div>
 
@@ -53,7 +53,7 @@ export default function ContactSection({ onNavigate }: ContactSectionProps) {
           </a>
           <button
             onClick={() => onNavigate('contact')}
-            className="inline-flex items-center gap-2 border border-gold text-gold hover:bg-gold hover:text-white px-7 py-3 rounded-full font-medium transition-colors"
+            className="inline-flex items-center gap-2 border border-sapphire text-sapphire hover:bg-sapphire hover:text-white px-7 py-3 rounded-full font-medium transition-colors"
           >
             Contact Page <ArrowRight className="w-4 h-4" />
           </button>

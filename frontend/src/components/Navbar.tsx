@@ -14,15 +14,11 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [currentPage]);
 
   const solid = scrolled || currentPage !== 'home' || mobileOpen;
 
@@ -40,63 +36,68 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
   };
 
   return (
-    <div
-      className={`fixed inset-x-0 top-0 z-50 flex justify-center transition-all duration-300 ${
-        solid ? 'pt-3 px-4' : 'pt-0 px-0'
-      }`}
-    >
+    <div className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`w-full transition-all duration-300 ${
+        className={`w-full max-w-6xl rounded-full backdrop-blur-md transition-colors duration-300 ${
           solid
-            ? 'max-w-6xl bg-cream/95 backdrop-blur-md shadow-lg shadow-ink/5 rounded-2xl px-4 sm:px-6 py-3'
-            : 'max-w-none bg-transparent px-4 sm:px-6 py-5'
+            ? 'bg-white/95 shadow-xl shadow-ink/10 border border-ink/10'
+            : 'bg-ink/60 border border-white/20'
         }`}
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center px-5 sm:px-8 py-3.5">
           <button
             onClick={() => handleNavigate('home')}
-            className={`text-base sm:text-lg font-display tracking-[0.1em] sm:tracking-[0.15em] uppercase flex items-center gap-2 sm:gap-3 transition-colors ${
-              solid ? 'text-ink hover:text-gold' : 'text-white hover:text-gold-soft'
+            className={`flex items-center gap-3 transition-colors ${
+              solid ? 'text-ink hover:text-sapphire' : 'text-white hover:text-sapphire-light'
             }`}
           >
             <img
               src={logo}
               alt="Kigali Luxury Cocktails"
-              className={`w-10 h-10 rounded-full object-cover ring-2 transition-all flex-shrink-0 ${
-                solid ? 'ring-gold/40' : 'ring-white/60'
+              className={`w-10 h-10 rounded-full object-cover ring-2 transition-all shrink-0 ${
+                solid ? 'ring-sapphire/30' : 'ring-white/40'
               }`}
             />
-            <span className="hidden sm:inline">Kigali Luxury Cocktails</span>
-            <span className="sm:hidden">KLC</span>
+            <span className="hidden sm:inline font-display text-lg font-semibold uppercase tracking-[0.08em]">
+              Kigali Luxury Cocktails
+            </span>
+            <span className="sm:hidden font-display text-lg font-semibold uppercase tracking-[0.08em]">
+              KLC
+            </span>
           </button>
 
-          <nav className="hidden md:flex gap-7 items-center">
+          <nav className="hidden md:flex gap-9 items-center">
             {links.map(({ page, label }) => (
               <button
                 key={page}
                 onClick={() => handleNavigate(page)}
-                className={`relative text-sm font-medium uppercase tracking-wider transition-colors py-1 ${
-                  solid ? 'text-taupe hover:text-ink' : 'text-white/85 hover:text-white'
+                className={`group relative text-xs font-semibold uppercase tracking-[0.12em] transition-colors py-1 ${
+                  currentPage === page
+                    ? solid
+                      ? 'text-sapphire'
+                      : 'text-white'
+                    : solid
+                      ? 'text-taupe hover:text-ink'
+                      : 'text-white/70 hover:text-white'
                 }`}
               >
                 {label}
-                {currentPage === page && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute left-0 right-0 -bottom-0.5 h-px bg-gold"
-                  />
-                )}
+                <span
+                  className={`absolute left-0 -bottom-0.5 h-px w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 ${
+                    currentPage === page ? 'scale-x-100' : ''
+                  } ${solid ? 'bg-sapphire' : 'bg-white'}`}
+                />
               </button>
             ))}
 
             <button
               onClick={() => handleNavigate('booking')}
-              className="bg-gold hover:bg-gold-soft text-white text-sm font-medium uppercase tracking-wider px-5 py-2 rounded-full transition-colors"
+              className="bg-sapphire hover:bg-sapphire-light text-white text-xs font-semibold uppercase tracking-widest px-6 py-3 rounded-full transition-colors shadow-md"
             >
-              Book Us
+              Book Catering
             </button>
           </nav>
 
@@ -104,9 +105,7 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
-            className={`md:hidden p-2 -mr-2 transition-colors ${
-              solid ? 'text-ink' : 'text-white'
-            }`}
+            className={`md:hidden p-2 -mr-2 transition-colors ${solid ? 'text-ink' : 'text-white'}`}
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -119,17 +118,15 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="md:hidden overflow-hidden"
+              className="md:hidden overflow-hidden border-t border-ink/10"
             >
-              <div className="flex flex-col items-start gap-1 pt-4 pb-1">
+              <div className="flex flex-col items-start gap-1 px-6 py-4">
                 {links.map(({ page, label }) => (
                   <button
                     key={page}
                     onClick={() => handleNavigate(page)}
-                    className={`w-full text-left text-sm font-medium uppercase tracking-wider transition-colors py-2.5 ${
-                      currentPage === page
-                        ? 'text-gold'
-                        : 'text-ink/80 hover:text-ink'
+                    className={`w-full text-left text-xs font-semibold uppercase tracking-[0.12em] py-3 transition-colors ${
+                      currentPage === page ? 'text-sapphire' : 'text-taupe hover:text-ink'
                     }`}
                   >
                     {label}
@@ -137,9 +134,9 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
                 ))}
                 <button
                   onClick={() => handleNavigate('booking')}
-                  className="mt-2 w-full bg-gold hover:bg-gold-soft text-white text-sm font-medium uppercase tracking-wider px-5 py-3 rounded-full transition-colors text-center"
+                  className="mt-2 w-full bg-sapphire hover:bg-sapphire-light text-white text-xs font-semibold uppercase tracking-widest px-5 py-3.5 rounded-full transition-colors text-center shadow-md"
                 >
-                  Book Us
+                  Book Catering
                 </button>
               </div>
             </motion.nav>
