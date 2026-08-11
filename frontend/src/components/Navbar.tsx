@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import type { PageState } from '../App';
-import logo from '../assets/cocktail logo.png';
+import logo from '../assets/logo-icon.png';
 
 interface NavbarProps {
   currentPage: PageState;

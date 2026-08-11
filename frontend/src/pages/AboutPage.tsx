@@ -67,15 +67,19 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
 
       <section className="py-16 sm:py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <motion.img
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6 }}
-            src={heroPortrait}
-            alt="Kigali Luxury Cocktails mixologist at work"
-            className="w-full h-80 md:h-104 object-cover rounded-2xl order-2 md:order-1"
-          />
+            className="w-full h-80 md:h-104 rounded-2xl overflow-hidden order-2 md:order-1"
+          >
+            <img
+              src={heroPortrait}
+              alt="Kigali Luxury Cocktails mixologist at work"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            />
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -117,15 +121,19 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
               us, not a fixed script. As we grow, that stays non-negotiable.
             </p>
           </motion.div>
-          <motion.img
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            src={anotherSetup}
-            alt="Kigali Luxury Cocktails event setup"
-            className="w-full h-80 md:h-104 object-cover rounded-2xl"
-          />
+            className="w-full h-80 md:h-104 rounded-2xl overflow-hidden"
+          >
+            <img
+              src={anotherSetup}
+              alt="Kigali Luxury Cocktails event setup"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            />
+          </motion.div>
         </div>
       </section>
 

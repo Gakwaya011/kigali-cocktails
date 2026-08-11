@@ -19,7 +19,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     <div>
       <HeroSection onNavigate={onNavigate} />
       <ShowcaseSection onNavigate={onNavigate} />
-      <ServicesSection />
+      <ServicesSection onNavigate={onNavigate} />
       <PastEventsSection onNavigate={onNavigate} />
       <AboutSection />
       <PackagesSection onNavigate={onNavigate} />

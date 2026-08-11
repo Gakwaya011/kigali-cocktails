@@ -5,7 +5,7 @@ import PackagesSection from '../components/PackagesSection';
 import CtaBandSection from '../components/CtaBandSection';
 import anotherSetup from '../assets/another set up.jpeg';
 import hero3 from '../assets/second hero replacer.jpg';
-import detailShot from '../assets/hero3 ring bell.jpg';
+import drinkFlightWall from '../assets/drink-flight-wall.jpg';
 import heroPortrait from '../assets/hero replaced the potrait 1.jpg';
 import hero1 from '../assets/hero1.jpg';
 
@@ -22,7 +22,7 @@ const services = [
   },
   {
     title: 'Custom Cocktail Menus',
-    image: detailShot,
+    image: drinkFlightWall,
     desc: 'Signature drinks designed around your event theme, colors, and taste preferences.',
     items: ['Signature Recipes', 'Menu Curation', 'Tasting Sessions'],
   },
@@ -83,13 +83,17 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
               transition={{ duration: 0.6 }}
               className="grid md:grid-cols-2 gap-10 md:gap-16 items-center"
             >
-              <img
-                src={service.image}
-                alt={service.title}
-                className={`w-full h-72 md:h-96 object-cover rounded-2xl ${
+              <div
+                className={`w-full h-72 md:h-96 rounded-2xl overflow-hidden ${
                   idx % 2 === 1 ? 'md:order-2' : ''
                 }`}
-              />
+              >
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                />
+              </div>
               <div className={idx % 2 === 1 ? 'md:order-1' : ''}>
                 <span className="font-display text-7xl sm:text-8xl text-sapphire/15 block leading-none mb-2">
                   0{idx + 1}

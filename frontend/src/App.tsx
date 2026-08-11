@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import LoadingScreen from './components/LoadingScreen';
 import HomePage from './pages/HomePage';
 import BookingPage from './pages/BookingPage';
 import AboutPage from './pages/AboutPage';
@@ -23,6 +25,7 @@ const pages: Record<PageState, React.ComponentType<{ onNavigate: (page: PageStat
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageState>('home');
+  const [loading, setLoading] = useState(true);
   const Page = pages[currentPage];
 
   const navigate = (page: PageState) => {
@@ -30,8 +33,22 @@ export default function App() {
     window.scrollTo({ top: 0 });
   };
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const timer = setTimeout(() => {
+      setLoading(false);
+      document.body.style.overflow = '';
+    }, 1600);
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-ink font-sans selection:bg-ink selection:text-white">
+      <AnimatePresence>{loading && <LoadingScreen />}</AnimatePresence>
+
       <Navbar currentPage={currentPage} onNavigate={navigate} />
 
       <main className="w-full">

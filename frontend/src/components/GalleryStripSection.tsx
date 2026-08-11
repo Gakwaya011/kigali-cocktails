@@ -3,13 +3,13 @@ import type { PageState } from '../App';
 import hero1 from '../assets/hero1.jpg';
 import heroPortrait from '../assets/hero replaced the potrait 1.jpg';
 import hero3 from '../assets/second hero replacer.jpg';
-import detailShot from '../assets/hero3 ring bell.jpg';
+import ringForCheers from '../assets/ring-for-cheers.jpg';
 
 interface GalleryStripProps {
   onNavigate: (page: PageState) => void;
 }
 
-const photos = [hero1, heroPortrait, hero3, detailShot];
+const photos = [hero1, heroPortrait, hero3, ringForCheers];
 
 export default function GalleryStripSection({ onNavigate }: GalleryStripProps) {
   return (

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import type { PageState } from '../App';
 import hero1 from '../assets/hero1.jpg';
-import hero3 from '../assets/second hero replacer.jpg';
+import martiniRow from '../assets/martini-row.jpg';
 import heroVideo from '../assets/IMG_4480 resized.mp4';
 
 interface ShowcaseProps {
@@ -32,7 +32,7 @@ export default function ShowcaseSection({ onNavigate }: ShowcaseProps) {
           {[
             { type: 'img', src: hero1, alt: 'Signature cocktail service', span: 'col-span-2' },
             { type: 'video', src: heroVideo, alt: 'Mixologist at work', span: 'col-span-2' },
-            { type: 'img', src: hero3, alt: 'Mobile bar setup detail', span: 'col-span-1 hidden sm:block' },
+            { type: 'img', src: martiniRow, alt: 'Signature cocktails ready to serve', span: 'col-span-1 hidden sm:block' },
           ].map((media, idx) => (
             <motion.div
               key={idx}

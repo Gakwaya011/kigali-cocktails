@@ -1,16 +1,16 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import type { PageState } from '../App';
-import hero1 from '../assets/hero1.jpg';
-import hero3 from '../assets/second hero replacer.jpg';
+import weddingTable from '../assets/wedding-table.jpg';
+import eventCrowd from '../assets/event-crowd.jpg';
 
 interface PastEventsProps {
   onNavigate: (page: PageState) => void;
 }
 
 const events = [
-  { photo: hero1, title: 'Weddings & Receptions' },
-  { photo: hero3, title: 'Corporate Events' },
+  { photo: weddingTable, title: 'Weddings & Receptions' },
+  { photo: eventCrowd, title: 'Corporate Events' },
 ];
 
 export default function PastEventsSection({ onNavigate }: PastEventsProps) {

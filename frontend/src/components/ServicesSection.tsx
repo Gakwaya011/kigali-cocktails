@@ -1,34 +1,40 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import hero1 from '../assets/hero1.jpg';
-import heroPortrait from '../assets/hero replaced the potrait 1.jpg';
-import hero3 from '../assets/second hero replacer.jpg';
-import detailShot from '../assets/hero3 ring bell.jpg';
+import { ArrowRight } from 'lucide-react';
+import type { PageState } from '../App';
+import mobileBarCart from '../assets/mobile-bar-cart.jpg';
+import cocktailTower from '../assets/cocktail-tower.jpg';
+import pouringDrinks from '../assets/pouring-drinks.jpg';
+import cateringStation from '../assets/catering-station.jpg';
+
+interface ServicesSectionProps {
+  onNavigate: (page: PageState) => void;
+}
 
 const services = [
   {
     title: 'Mobile Bar Setup',
-    image: hero3,
+    image: mobileBarCart,
     items: ['Portable Bar Design', 'Setup & Breakdown', 'Venue Styling'],
   },
   {
     title: 'Custom Cocktail Menus',
-    image: detailShot,
+    image: cocktailTower,
     items: ['Signature Recipes', 'Menu Curation', 'Tasting Sessions'],
   },
   {
     title: 'Professional Mixologists',
-    image: heroPortrait,
+    image: pouringDrinks,
     items: ['Certified Bartenders', 'Flair & Service', 'Guest Hospitality'],
   },
   {
     title: 'Full Event Staffing',
-    image: hero1,
+    image: cateringStation,
     items: ['Glassware & Garnish', 'Dedicated Waitstaff', 'Full Coordination'],
   },
 ];
 
-export default function ServicesSection() {
+export default function ServicesSection({ onNavigate }: ServicesSectionProps) {
   const [active, setActive] = useState<number | null>(null);
 
   return (
@@ -38,7 +44,6 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          onViewportEnter={() => setActive(0)}
           transition={{ duration: 0.7 }}
           className="bg-ink rounded-4xl sm:rounded-[2.5rem] px-6 sm:px-12 md:px-16 pt-12 sm:pt-16 pb-12 sm:pb-16"
         >
@@ -54,8 +59,8 @@ export default function ServicesSection() {
           </p>
 
           <div
-            className="flex items-end gap-2 sm:gap-4 h-95 sm:h-120"
-            onMouseLeave={() => setActive(0)}
+            className="flex items-center gap-2 sm:gap-4 h-95 sm:h-120"
+            onMouseLeave={() => setActive(null)}
           >
             {services.map((service, idx) => {
               const isActive = active === idx;
@@ -75,23 +80,13 @@ export default function ServicesSection() {
                   />
                   <div
                     className={`absolute inset-0 bg-linear-to-t from-ink/90 via-ink/20 to-ink/40 transition-opacity duration-500 ${
-                      isActive ? 'opacity-100' : 'opacity-60'
+                      isActive ? 'opacity-100' : 'opacity-75'
                     }`}
                   />
 
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.h3
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.3, delay: 0.15 }}
-                        className="absolute top-4 left-4 right-4 text-white font-semibold text-sm sm:text-base uppercase tracking-wide"
-                      >
-                        {service.title}
-                      </motion.h3>
-                    )}
-                  </AnimatePresence>
+                  <h3 className="absolute top-4 left-4 right-4 text-white font-semibold text-sm sm:text-base uppercase tracking-wide">
+                    {service.title}
+                  </h3>
 
                   <AnimatePresence>
                     {isActive && (
@@ -113,6 +108,15 @@ export default function ServicesSection() {
                 </motion.div>
               );
             })}
+          </div>
+
+          <div className="mt-10 sm:mt-12 text-center sm:text-left">
+            <button
+              onClick={() => onNavigate('services')}
+              className="inline-flex items-center gap-2 text-white font-medium border-b border-sapphire-light hover:text-sapphire-light hover:border-white transition-colors pb-1"
+            >
+              Explore All Services <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </motion.div>
       </div>

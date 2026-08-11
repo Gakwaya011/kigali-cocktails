@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import heroPortrait from '../assets/hero replaced the potrait 1.jpg';
-import detailShot from '../assets/hero3 ring bell.jpg';
+import ringForCocktail from '../assets/ring-for-cocktail.jpg';
 
 const stats = [
   { value: '30+', label: 'Signature Cocktails' },
@@ -33,11 +33,13 @@ export default function AboutSection() {
               launches, and private celebrations across Kigali.
             </p>
           </div>
-          <img
-            src={heroPortrait}
-            alt="Kigali Luxury Cocktails mixologist at work"
-            className="w-full h-72 md:h-96 object-cover rounded-2xl"
-          />
+          <div className="w-full h-72 md:h-96 rounded-2xl overflow-hidden">
+            <img
+              src={heroPortrait}
+              alt="Kigali Luxury Cocktails mixologist at work"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            />
+          </div>
         </motion.div>
 
         <motion.div
@@ -47,11 +49,13 @@ export default function AboutSection() {
           transition={{ duration: 0.6 }}
           className="grid md:grid-cols-2 gap-10 md:gap-16 items-center"
         >
-          <img
-            src={detailShot}
-            alt="Cocktail garnish detail"
-            className="w-full h-72 md:h-96 object-cover rounded-2xl md:order-1"
-          />
+          <div className="w-full h-72 md:h-96 rounded-2xl overflow-hidden md:order-1">
+            <img
+              src={ringForCocktail}
+              alt="Ring for cocktail service detail"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            />
+          </div>
           <div className="md:border-l md:border-ink/10 md:pl-16 md:order-2">
             <p className="text-sapphire text-xs font-medium uppercase tracking-[0.3em] mb-3">
               Our Philosophy
