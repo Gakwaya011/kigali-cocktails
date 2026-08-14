@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -13,23 +14,31 @@ import LoginPage from './pages/LoginPage';
 
 export type PageState = 'home' | 'about' | 'services' | 'booking' | 'gallery' | 'contact' | 'login';
 
-const pages: Record<PageState, React.ComponentType<{ onNavigate: (page: PageState) => void }>> = {
-  home: HomePage,
-  about: AboutPage,
-  services: ServicesPage,
-  booking: BookingPage,
-  gallery: GalleryPage,
-  contact: ContactPage,
-  login: LoginPage,
-};
+const routes: {
+  path: string;
+  page: PageState;
+  Component: React.ComponentType<{ onNavigate: (page: PageState) => void }>;
+}[] = [
+  { path: '/', page: 'home', Component: HomePage },
+  { path: '/about', page: 'about', Component: AboutPage },
+  { path: '/services', page: 'services', Component: ServicesPage },
+  { path: '/booking', page: 'booking', Component: BookingPage },
+  { path: '/gallery', page: 'gallery', Component: GalleryPage },
+  { path: '/contact', page: 'contact', Component: ContactPage },
+  { path: '/login', page: 'login', Component: LoginPage },
+];
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageState>('home');
+const pathFor = (page: PageState) => routes.find((r) => r.page === page)?.path ?? '/';
+
+function AppShell() {
+  const location = useLocation();
+  const routerNavigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const Page = pages[currentPage];
+
+  const currentPage = routes.find((r) => r.path === location.pathname)?.page ?? 'home';
 
   const navigate = (page: PageState) => {
-    setCurrentPage(page);
+    routerNavigate(pathFor(page));
     window.scrollTo({ top: 0 });
   };
 
@@ -52,10 +61,23 @@ export default function App() {
       <Navbar currentPage={currentPage} onNavigate={navigate} />
 
       <main className="w-full">
-        <Page onNavigate={navigate} />
+        <Routes>
+          {routes.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component onNavigate={navigate} />} />
+          ))}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       <Footer onNavigate={navigate} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppShell />
+    </BrowserRouter>
   );
 }
