@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import logo from '../assets/logo-icon.png';
+import logo from '../assets/kigali_luxury_cocktails_logo_white.png';
 
 export default function LoadingScreen() {
   return (
@@ -26,16 +26,8 @@ export default function LoadingScreen() {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-16 h-16 rounded-full object-cover ring-2 ring-sapphire-light/40"
+          className="w-48 sm:w-56 h-auto"
         />
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-white text-sm font-display uppercase tracking-[0.35em]"
-        >
-          Kigali Luxury Cocktails
-        </motion.p>
         <div className="w-40 h-px bg-white/15 overflow-hidden rounded-full">
           <motion.div
             initial={{ width: '0%' }}

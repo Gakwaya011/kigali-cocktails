@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import type { PageState } from '../App';
-import logo from '../assets/logo-icon.png';
+import logoDark from '../assets/logo-wordmark-dark.png';
+import logoWhite from '../assets/logo-wordmark-white.png';
 
 interface NavbarProps {
   currentPage: PageState;
@@ -49,26 +50,13 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
             : 'bg-ink/60 border border-white/20'
         }`}
       >
-        <div className="flex justify-between items-center px-5 sm:px-8 py-3.5">
-          <button
-            onClick={() => handleNavigate('home')}
-            className={`flex items-center gap-3 transition-colors ${
-              solid ? 'text-ink hover:text-sapphire' : 'text-white hover:text-sapphire-light'
-            }`}
-          >
+        <div className="flex justify-between items-center px-5 sm:px-8 py-3">
+          <button onClick={() => handleNavigate('home')} className="shrink-0">
             <img
-              src={logo}
+              src={solid ? logoDark : logoWhite}
               alt="Kigali Luxury Cocktails"
-              className={`w-10 h-10 rounded-full object-cover ring-2 transition-all shrink-0 ${
-                solid ? 'ring-sapphire/30' : 'ring-white/40'
-              }`}
+              className="h-9 sm:h-11 w-auto"
             />
-            <span className="hidden sm:inline font-display text-lg font-semibold uppercase tracking-[0.08em]">
-              Kigali Luxury Cocktails
-            </span>
-            <span className="sm:hidden font-display text-lg font-semibold uppercase tracking-[0.08em]">
-              KLC
-            </span>
           </button>
 
           <nav className="hidden md:flex gap-9 items-center">

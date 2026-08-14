@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Phone, MessageCircle } from 'lucide-react';
 import type { PageState } from '../App';
-import logo from '../assets/logo-icon.png';
+import logo from '../assets/logo-wordmark-white.png';
 
 interface FooterProps {
   onNavigate: (page: PageState) => void;
@@ -33,16 +33,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center md:items-start gap-3"
         >
-          <div className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt="Kigali Luxury Cocktails"
-              className="w-11 h-11 rounded-full object-cover ring-2 ring-sapphire-light/40"
-            />
-            <span className="font-display tracking-[0.15em] text-base text-white uppercase">
-              Kigali Luxury Cocktails
-            </span>
-          </div>
+          <img src={logo} alt="Kigali Luxury Cocktails" className="h-11 w-auto" />
           <p className="text-white/60 text-sm font-light italic">
             Where elegance meets every sip.
           </p>
