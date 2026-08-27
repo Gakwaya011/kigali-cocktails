@@ -24,7 +24,11 @@ export default function ContactSection() {
   };
 
   const infoRows = [
-    { icon: MapPin, label: 'Serving all of Kigali, Rwanda' },
+    {
+      icon: MapPin,
+      label: '28 KG 11 Ave, Kigali, Rwanda',
+      href: 'https://www.google.com/maps?q=24V8%2BC93%2C%2028%20KG%2011%20Ave%2C%20Kigali%2C%20Rwanda',
+    },
     { icon: Phone, label: '0783 845 473', href: 'tel:+250783845473' },
     { icon: MessageCircle, label: 'Chat on WhatsApp', href: `https://wa.me/${waNumber}` },
   ];
@@ -111,7 +115,7 @@ export default function ContactSection() {
               <div className="rounded-2xl overflow-hidden border border-white/15 h-56 sm:h-64 grayscale-[0.3] contrast-125">
                 <iframe
                   title="Kigali Luxury Cocktails location"
-                  src="https://www.google.com/maps?q=Kigali,Rwanda&output=embed"
+                  src="https://www.google.com/maps?q=24V8%2BC93%2C%2028%20KG%2011%20Ave%2C%20Kigali%2C%20Rwanda&output=embed"
                   className="w-full h-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

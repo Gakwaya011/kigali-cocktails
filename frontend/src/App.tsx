@@ -8,11 +8,12 @@ import HomePage from './pages/HomePage';
 import BookingPage from './pages/BookingPage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
+import MenuPage from './pages/MenuPage';
 import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 
-export type PageState = 'home' | 'about' | 'services' | 'booking' | 'gallery' | 'contact' | 'login';
+export type PageState = 'home' | 'about' | 'services' | 'menu' | 'booking' | 'gallery' | 'contact' | 'login';
 
 const routes: {
   path: string;
@@ -22,6 +23,7 @@ const routes: {
   { path: '/', page: 'home', Component: HomePage },
   { path: '/about', page: 'about', Component: AboutPage },
   { path: '/services', page: 'services', Component: ServicesPage },
+  { path: '/menu', page: 'menu', Component: MenuPage },
   { path: '/booking', page: 'booking', Component: BookingPage },
   { path: '/gallery', page: 'gallery', Component: GalleryPage },
   { path: '/contact', page: 'contact', Component: ContactPage },

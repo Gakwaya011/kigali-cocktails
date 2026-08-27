@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import type { PageState } from '../App';
 import PackagesSection from '../components/PackagesSection';
 import CtaBandSection from '../components/CtaBandSection';
@@ -25,6 +25,7 @@ const services = [
     image: drinkFlightWall,
     desc: 'Signature drinks designed around your event theme, colors, and taste preferences.',
     items: ['Signature Recipes', 'Menu Curation', 'Tasting Sessions'],
+    link: { label: 'View Full Menu', page: 'menu' as PageState },
   },
   {
     title: 'Professional Mixologists',
@@ -102,7 +103,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
                   {service.title}
                 </h2>
                 <p className="text-taupe font-light leading-relaxed mb-6">{service.desc}</p>
-                <ul className="space-y-2">
+                <ul className="space-y-2 mb-6">
                   {service.items.map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm text-ink">
                       <Check className="w-4 h-4 text-sapphire shrink-0" strokeWidth={2} />
@@ -110,6 +111,14 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
                     </li>
                   ))}
                 </ul>
+                {service.link && (
+                  <button
+                    onClick={() => onNavigate(service.link!.page)}
+                    className="inline-flex items-center gap-2 text-sapphire font-medium border-b border-sapphire hover:text-sapphire-light hover:border-sapphire-light transition-colors pb-0.5"
+                  >
+                    {service.link.label} <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </motion.div>
           ))}

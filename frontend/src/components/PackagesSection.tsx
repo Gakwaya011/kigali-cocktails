@@ -8,39 +8,24 @@ interface PackagesProps {
 
 const packages = [
   {
-    title: 'The Wedding Reception',
-    price: 'Custom Quote',
-    desc: 'A full premium open bar setup for your special day.',
-    features: [
-      '2 Professional Mixologists',
-      'Custom Bride & Groom Signature Drinks',
-      'Elegant White Portable Bar',
-      'Premium Glassware & Garnishes',
-    ],
-    featured: true,
-  },
-  {
-    title: 'Bridal Shower / VIP Party',
-    price: 'Starting at 150k RWF',
-    desc: 'Intimate, aesthetic setups perfect for photos and celebrations.',
-    features: [
-      '1 Mixologist',
-      "Custom 'Cheers' Cocktail Wall",
-      '3 Pre-selected Menu Options',
-      '4 Hours of Service',
-    ],
+    title: 'Silver Package',
+    price: '5,000',
+    desc: 'A relaxed mocktail bar for your event, served in elegant glassware.',
+    features: ['Mocktails', 'Glass setup', 'Professional service'],
     featured: false,
   },
   {
-    title: 'Corporate Launch',
-    price: 'Custom Quote',
-    desc: 'High-volume, branded beverage service for professional events.',
-    features: [
-      'Brand-colored Cocktails',
-      'Rapid Service Setup',
-      'Non-alcoholic Mocktail Options',
-      'Professional Uniformed Staff',
-    ],
+    title: 'Golden Package',
+    price: '7,000',
+    desc: 'Mocktails and cocktails together, with a signature ring-sip and champagne wall.',
+    features: ['Mocktails + cocktails', 'Ring sip setup', 'Champagne wall'],
+    featured: true,
+  },
+  {
+    title: 'Premium Package',
+    price: '9,000',
+    desc: 'Full creative control — build your own cocktail or mocktail menu, any setup style.',
+    features: ['Choose your own cocktail or mocktail', 'All setup styles included', 'Modify your own setup'],
     featured: false,
   },
 ];
@@ -62,9 +47,12 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
           <h2 className="font-sans font-black uppercase tracking-tighter leading-[0.9] text-5xl sm:text-6xl md:text-7xl text-ink mb-5">
             Packages.
           </h2>
-          <p className="text-taupe font-light">
+          <p className="text-taupe font-light mb-5">
             Tailored mobile bar experiences for any occasion.
           </p>
+          <span className="inline-block bg-sapphire/10 text-sapphire text-xs font-semibold uppercase tracking-wide px-4 py-2 rounded-full">
+            Booking 200+ guests? Setup is free.
+          </span>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -100,7 +88,7 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
                     pkg.featured ? 'text-sapphire-light' : 'text-sapphire'
                   }`}
                 >
-                  {pkg.price}
+                  {pkg.price} RWF <span className="opacity-70">/ guest</span>
                 </p>
                 <p className={`font-light mb-6 ${pkg.featured ? 'text-white/70' : 'text-taupe'}`}>
                   {pkg.desc}

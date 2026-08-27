@@ -1,7 +1,7 @@
 import { motion, type Variants } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import type { PageState } from '../App';
-import heroImage from '../assets/new hero pic.jpg';
+import heroImage from '../assets/new hero pic.jpeg';
 
 interface HeroProps {
   onNavigate: (page: PageState) => void;
@@ -35,10 +35,10 @@ export default function HeroSection({ onNavigate }: HeroProps) {
         initial={{ scale: 1.08 }}
         animate={{ scale: 1 }}
         transition={{ duration: 12, ease: 'easeOut' }}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-[70%_40%]"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/50 to-ink/20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/70 to-ink/25" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
 
       <motion.div
         variants={container}

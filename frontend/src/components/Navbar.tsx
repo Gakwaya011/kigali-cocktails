@@ -27,6 +27,7 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
     { page: 'home', label: 'Home' },
     { page: 'about', label: 'About' },
     { page: 'services', label: 'Services' },
+    { page: 'menu', label: 'Menu' },
     { page: 'gallery', label: 'Gallery' },
     { page: 'contact', label: 'Contact' },
   ];
