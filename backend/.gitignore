@@ -1,5 +1,11 @@
 node_modules
+dist
 # Keep environment variables out of version control
 .env
 
 /src/generated/prisma
+
+# Locally-uploaded gallery images (not durable storage — see plan notes)
+uploads/*
+!uploads/.gitkeep
+
