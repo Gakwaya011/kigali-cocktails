@@ -26,7 +26,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       <CtaBandSection onNavigate={onNavigate} />
       <TestimonialsSection />
       <GalleryStripSection onNavigate={onNavigate} />
-      <ContactSection />
+      <ContactSection source="home" />
     </div>
   );
 }

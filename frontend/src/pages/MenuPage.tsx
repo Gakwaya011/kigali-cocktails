@@ -1,13 +1,27 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Martini, GlassWater, Info } from 'lucide-react';
 import type { PageState } from '../App';
 import CtaBandSection from '../components/CtaBandSection';
+import { api } from '../lib/api';
 
 interface MenuPageProps {
   onNavigate: (page: PageState) => void;
 }
 
-const alcoholic = [
+interface Drink {
+  name: string;
+  ingredients: string;
+}
+
+interface ApiCocktail {
+  id: string;
+  name: string;
+  description: string;
+  category: 'ALCOHOLIC' | 'NON_ALCOHOLIC';
+}
+
+const fallbackAlcoholic: Drink[] = [
   { name: 'Idios Amigo', ingredients: 'Blue curaçao, gin, rum, tequila, lemon, triple sec' },
   { name: 'Long Island', ingredients: 'Gin, rum, tequila, vodka, simple syrup, lemon' },
   { name: 'Mojito (All Flavours)', ingredients: 'Mint, simple syrup, rum, lemon, ice' },
@@ -16,7 +30,7 @@ const alcoholic = [
   { name: 'Sex on the Beach', ingredients: 'Orange juice, vodka, peach schnapps, rum, cranberry juice' },
 ];
 
-const nonAlcoholic = [
+const fallbackNonAlcoholic: Drink[] = [
   { name: 'Blessed Palm', ingredients: 'Simple syrup, lemon juice, watermelon juice, sparkling water, mint' },
   { name: 'Honey Orangeade', ingredients: 'Honey, orange juice, lemon juice, sprite, ice' },
   { name: 'Mango Breeze', ingredients: 'Mango, strawberry juice, sparkling water, lemon, simple syrup' },
@@ -24,7 +38,7 @@ const nonAlcoholic = [
   { name: 'Strawberry Breeze', ingredients: 'Strawberry juice, lemon, simple syrup, pineapple juice' },
 ];
 
-function MenuList({ drinks }: { drinks: { name: string; ingredients: string }[] }) {
+function MenuList({ drinks }: { drinks: Drink[] }) {
   return (
     <div className="border-t border-ink/10">
       {drinks.map((drink, idx) => (
@@ -45,6 +59,23 @@ function MenuList({ drinks }: { drinks: { name: string; ingredients: string }[] 
 }
 
 export default function MenuPage({ onNavigate }: MenuPageProps) {
+  const [alcoholic, setAlcoholic] = useState<Drink[]>(fallbackAlcoholic);
+  const [nonAlcoholic, setNonAlcoholic] = useState<Drink[]>(fallbackNonAlcoholic);
+
+  useEffect(() => {
+    api
+      .get<ApiCocktail[]>('/api/menu')
+      .then((data) => {
+        if (data.length === 0) return; // keep the fallback rather than show an empty menu
+        const toDrink = (c: ApiCocktail): Drink => ({ name: c.name, ingredients: c.description });
+        setAlcoholic(data.filter((c) => c.category === 'ALCOHOLIC').map(toDrink));
+        setNonAlcoholic(data.filter((c) => c.category === 'NON_ALCOHOLIC').map(toDrink));
+      })
+      .catch(() => {
+        // backend unreachable — fallback data (already the initial state) stays in place
+      });
+  }, []);
+
   return (
     <div>
       <section className="pt-32 sm:pt-40 pb-16 px-6 bg-white">

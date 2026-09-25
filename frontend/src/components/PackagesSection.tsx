@@ -1,13 +1,34 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import type { PageState } from '../App';
+import { api } from '../lib/api';
 
 interface PackagesProps {
   onNavigate: (page: PageState) => void;
 }
 
-const packages = [
+interface Package {
+  id: string;
+  title: string;
+  price: string;
+  desc: string;
+  features: string[];
+  featured: boolean;
+}
+
+interface ApiPackage {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  features: string[];
+  featured: boolean;
+}
+
+const fallbackPackages: Package[] = [
   {
+    id: 'silver',
     title: 'Silver Package',
     price: '5,000',
     desc: 'A relaxed mocktail bar for your event, served in elegant glassware.',
@@ -15,6 +36,7 @@ const packages = [
     featured: false,
   },
   {
+    id: 'golden',
     title: 'Golden Package',
     price: '7,000',
     desc: 'Mocktails and cocktails together, with a signature ring-sip and champagne wall.',
@@ -22,6 +44,7 @@ const packages = [
     featured: true,
   },
   {
+    id: 'premium',
     title: 'Premium Package',
     price: '9,000',
     desc: 'Full creative control — build your own cocktail or mocktail menu, any setup style.',
@@ -31,6 +54,29 @@ const packages = [
 ];
 
 export default function PackagesSection({ onNavigate }: PackagesProps) {
+  const [packages, setPackages] = useState<Package[]>(fallbackPackages);
+
+  useEffect(() => {
+    api
+      .get<ApiPackage[]>('/api/packages')
+      .then((data) => {
+        if (data.length === 0) return; // keep the fallback rather than show an empty section
+        setPackages(
+          data.map((p) => ({
+            id: p.id,
+            title: p.title,
+            price: Number(p.price).toLocaleString(),
+            desc: p.description,
+            features: p.features,
+            featured: p.featured,
+          }))
+        );
+      })
+      .catch(() => {
+        // backend unreachable — fallbackPackages (already the initial state) stays in place
+      });
+  }, []);
+
   return (
     <section className="py-16 sm:py-24 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -58,7 +104,7 @@ export default function PackagesSection({ onNavigate }: PackagesProps) {
         <div className="grid md:grid-cols-3 gap-8">
           {packages.map((pkg, idx) => (
             <motion.div
-              key={pkg.title}
+              key={pkg.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import type { PageState } from '../App';
+import { useAuth } from '../auth/useAuth';
 import logoDark from '../assets/logo-wordmark-dark.png';
 import logoWhite from '../assets/logo-wordmark-white.png';
 
@@ -11,6 +12,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
+  const { user } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -85,6 +87,16 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
             ))}
 
             <button
+              onClick={() => handleNavigate(user ? 'account' : 'login')}
+              aria-label={user ? 'My Account' : 'Log In'}
+              className={`p-2 rounded-full transition-colors ${
+                solid ? 'text-taupe hover:text-ink hover:bg-ink/5' : 'text-white/80 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              <User className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+
+            <button
               onClick={() => handleNavigate('booking')}
               className="bg-sapphire hover:bg-sapphire-light text-white text-xs font-semibold uppercase tracking-widest px-6 py-3 rounded-full transition-colors shadow-md"
             >
@@ -123,6 +135,16 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
                     {label}
                   </button>
                 ))}
+                <button
+                  onClick={() => handleNavigate(user ? 'account' : 'login')}
+                  className={`w-full text-left text-xs font-semibold uppercase tracking-[0.12em] py-3 transition-colors ${
+                    currentPage === 'account' || currentPage === 'login'
+                      ? 'text-sapphire'
+                      : 'text-taupe hover:text-ink'
+                  }`}
+                >
+                  {user ? 'My Account' : 'Log In'}
+                </button>
                 <button
                   onClick={() => handleNavigate('booking')}
                   className="mt-2 w-full bg-sapphire hover:bg-sapphire-light text-white text-xs font-semibold uppercase tracking-widest px-5 py-3.5 rounded-full transition-colors text-center shadow-md"

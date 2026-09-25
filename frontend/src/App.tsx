@@ -12,8 +12,22 @@ import MenuPage from './pages/MenuPage';
 import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
+import AccountPage from './pages/AccountPage';
+import AdminApp from './admin/AdminApp';
+import { AuthProvider } from './auth/AuthProvider';
 
-export type PageState = 'home' | 'about' | 'services' | 'menu' | 'booking' | 'gallery' | 'contact' | 'login';
+export type PageState =
+  | 'home'
+  | 'about'
+  | 'services'
+  | 'menu'
+  | 'booking'
+  | 'gallery'
+  | 'contact'
+  | 'login'
+  | 'signup'
+  | 'account';
 
 const routes: {
   path: string;
@@ -28,11 +42,13 @@ const routes: {
   { path: '/gallery', page: 'gallery', Component: GalleryPage },
   { path: '/contact', page: 'contact', Component: ContactPage },
   { path: '/login', page: 'login', Component: LoginPage },
+  { path: '/signup', page: 'signup', Component: SignUpPage },
+  { path: '/account', page: 'account', Component: AccountPage },
 ];
 
 const pathFor = (page: PageState) => routes.find((r) => r.page === page)?.path ?? '/';
 
-function AppShell() {
+function PublicAppShell() {
   const location = useLocation();
   const routerNavigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -64,9 +80,11 @@ function AppShell() {
 
       <main className="w-full">
         <Routes>
-          {routes.map(({ path, Component }) => (
-            <Route key={path} path={path} element={<Component onNavigate={navigate} />} />
-          ))}
+          {routes
+            .filter(({ page }) => page !== 'login' && page !== 'signup')
+            .map(({ path, Component }) => (
+              <Route key={path} path={path} element={<Component onNavigate={navigate} />} />
+            ))}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
@@ -76,10 +94,32 @@ function AppShell() {
   );
 }
 
+function StandaloneAuthPage({
+  Component,
+}: {
+  Component: React.ComponentType<{ onNavigate: (page: PageState) => void }>;
+}) {
+  const routerNavigate = useNavigate();
+
+  const navigate = (page: PageState) => {
+    routerNavigate(pathFor(page));
+    window.scrollTo({ top: 0 });
+  };
+
+  return <Component onNavigate={navigate} />;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <AppShell />
+      <AuthProvider>
+        <Routes>
+          <Route path="/admin/*" element={<AdminApp />} />
+          <Route path="/login" element={<StandaloneAuthPage Component={LoginPage} />} />
+          <Route path="/signup" element={<StandaloneAuthPage Component={SignUpPage} />} />
+          <Route path="/*" element={<PublicAppShell />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

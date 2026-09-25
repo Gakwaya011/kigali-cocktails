@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import type { PageState } from '../App';
 import CtaBandSection from '../components/CtaBandSection';
+import { api } from '../lib/api';
 import hero1 from '../assets/hero1.jpg';
 import hero2 from '../assets/hero2.jpg';
 import heroPortrait from '../assets/hero replaced the potrait 1.jpg';
@@ -9,11 +11,26 @@ import detailShot from '../assets/hero3 ring bell.jpg';
 import cocktailSetup from '../assets/cocktail set up.jpeg';
 import anotherSetup from '../assets/another set up.jpeg';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 interface GalleryPageProps {
   onNavigate: (page: PageState) => void;
 }
 
-const photos = [
+interface Photo {
+  src: string;
+  span: string;
+}
+
+interface ApiGalleryImage {
+  id: string;
+  url: string;
+  caption: string | null;
+}
+
+// The curated starter set stays as the base of the gallery — admin-added
+// photos from the dashboard are appended after these, not a replacement.
+const curatedPhotos: Photo[] = [
   { src: cocktailSetup, span: 'md:col-span-2 md:row-span-2' },
   { src: heroPortrait, span: 'md:row-span-2' },
   { src: hero1, span: '' },
@@ -24,6 +41,24 @@ const photos = [
 ];
 
 export default function GalleryPage({ onNavigate }: GalleryPageProps) {
+  const [photos, setPhotos] = useState<Photo[]>(curatedPhotos);
+
+  useEffect(() => {
+    api
+      .get<ApiGalleryImage[]>('/api/gallery')
+      .then((images) => {
+        if (images.length === 0) return;
+        const added: Photo[] = images.map((img) => ({
+          src: img.url.startsWith('http') ? img.url : `${API_URL}${img.url}`,
+          span: '',
+        }));
+        setPhotos([...curatedPhotos, ...added]);
+      })
+      .catch(() => {
+        // backend unreachable — curated photos (already the initial state) stay in place
+      });
+  }, []);
+
   return (
     <div>
       <section className="pt-32 sm:pt-40 pb-12 sm:pb-16 px-6 bg-white">

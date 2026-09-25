@@ -27,7 +27,7 @@ export default function ContactPage() {
         </motion.div>
       </section>
 
-      <ContactSection />
+      <ContactSection source="contact" />
     </div>
   );
 }
